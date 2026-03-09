@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evenimente — Campus Info Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Campus <span>Info Hub</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Acasa</a></li>
+    <li><a href="library.html">Biblioteca</a></li>
+    <li><a href="cafeteria.html">Cantina</a></li>
+    <li><a href="events.html" class="active">Evenimente</a></li>
+    <li><a href="https://www.google.com/maps" target="_blank" rel="noopener">Harta</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <!-- Relative URL -->
+      <a href="../index.html">Acasa</a>
+      <span>/</span>
+      Evenimente
+    </div>
+    <h1>Evenimente si Activitati</h1>
+    <p>Conferinte, workshop-uri, sport si oportunitati de cariera pe campusul nostru.</p>
+  </div>
+</div>
+
+<!-- Fragment navigation -->
+<div class="sub-nav">
+  <div class="sub-nav-inner">
+    <a href="#upcoming">Evenimente</a>
+    <a href="#career">Centrul de Cariera</a>
+    <a href="#sport">Sala de Sport</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- Upcoming events — fragment target -->
+  <section class="section" id="upcoming">
+    <h2 class="section-title">Evenimente viitoare</h2>
+
+    <div class="card" style="padding:0 1.5rem;">
+
+      <div class="event-row">
+        <div class="event-date-box">
+          <div class="event-day">12</div>
+          <div class="event-month">Feb</div>
+        </div>
+        <div class="event-body">
+          <div class="event-type">Workshop</div>
+          <div class="event-title">CV si LinkedIn pentru IT</div>
+          <div class="event-meta">
+            <span>Aula Magna</span>
+            <span>14:00 – 16:00</span>
+            <span>80 locuri</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-date-box">
+          <div class="event-day">15</div>
+          <div class="event-month">Feb</div>
+        </div>
+        <div class="event-body">
+          <div class="event-type">Conferinta</div>
+          <div class="event-title">Inteligenta Artificiala si Societate</div>
+          <div class="event-meta">
+            <span>Aula Magna</span>
+            <span>10:00 – 18:00</span>
+            <span>800 locuri</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-date-box">
+          <div class="event-day">20</div>
+          <div class="event-month">Feb</div>
+        </div>
+        <div class="event-body">
+          <div class="event-type">Sport</div>
+          <div class="event-title">Turneu de Baschet Inter-Facultati</div>
+          <div class="event-meta">
+            <span>Sala de Sport</span>
+            <span>09:00 – 17:00</span>
+            <span>Inscriere pana pe 18 Feb</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-date-box">
+          <div class="event-day">28</div>
+          <div class="event-month">Feb</div>
+        </div>
+        <div class="event-body">
+          <div class="event-type">Cariera</div>
+          <div class="event-title">Targ de Internship-uri Primavara 2025</div>
+          <div class="event-meta">
+            <span>Aula Magna</span>
+            <span>10:00 – 17:00</span>
+            <span>30+ companii</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Fragment link -->
+    <p style="margin-top:1.25rem; font-size:0.78rem;">
+      <a href="events.html#career" style="color:var(--accent); text-decoration:none; font-weight:500; letter-spacing:0.04em; text-transform:uppercase;">
+        Centrul de Cariera &rarr;
+      </a>
+    </p>
+  </section>
+
+  <hr class="divider" style="margin:0 0 3.5rem;" />
+
+  <!-- Career center — fragment target -->
+  <section class="section" id="career">
+    <h2 class="section-title">Centrul de Cariera</h2>
+    <div class="grid-auto">
+
+      <div class="card">
+        <div class="card-label">Consultanta</div>
+        <div class="card-title">Revizuire CV</div>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.5rem; line-height:1.6;">Sesiuni individuale cu consilieri specializati. Rezervare online sau la sediu.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Practica</div>
+        <div class="card-title">Internship-uri</div>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.5rem; line-height:1.6;">Parteneriate cu 200+ companii. Acces la portal exclusiv de oportunitati.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Pregatire</div>
+        <div class="card-title">Mock Interviews</div>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.5rem; line-height:1.6;">Simulari de interviuri cu voluntari din industrie. Feedback detaliat.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Formare</div>
+        <div class="card-title">Workshopuri saptamanale</div>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.5rem; line-height:1.6;">Teme: negociere salariu, networking, LinkedIn, personal branding.</p>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:1.25rem;">
+      <div class="card-label">Contact</div>
+      <table class="info-table">
+        <tr><td>Locatie</td><td>Cladirea E, Etaj 3</td></tr>
+        <tr><td>Program</td><td class="open">09:00 – 17:00 (L–V)</td></tr>
+        <tr><td>Email</td><td><a href="mailto:cariera@campus.ro" style="color:var(--accent)">cariera@campus.ro</a></td></tr>
+        <!-- Absolute URL -->
+        <tr><td>Portal joburi</td><td><a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener" style="color:var(--accent)">LinkedIn Jobs</a></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin:0 0 3.5rem;" />
+
+  <!-- Sport — fragment target -->
+  <section class="section" id="sport">
+    <h2 class="section-title">Sala de Sport</h2>
+    <div class="grid-2">
+
+      <div class="card">
+        <div class="card-label">Program</div>
+        <table class="info-table">
+          <tr><td>Luni – Vineri</td><td class="open">06:00 – 22:00</td></tr>
+          <tr><td>Sambata</td><td class="open">08:00 – 20:00</td></tr>
+          <tr><td>Duminica</td><td class="open">09:00 – 18:00</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Abonamente studenti</div>
+        <table class="info-table">
+          <tr><td>Lunar</td><td style="font-weight:500;">50 lei</td></tr>
+          <tr><td>Semestrial</td><td style="font-weight:500;">200 lei</td></tr>
+          <tr><td>Vizita unica</td><td style="font-weight:500;">10 lei</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:1.25rem;">
+      <div class="card-label">Echipamente disponibile</div>
+      <div class="tags" style="margin-top:0.5rem;">
+        <span class="tag">Aparate cardio</span>
+        <span class="tag">Greutati libere</span>
+        <span class="tag">Masini de forta</span>
+        <span class="tag">Teren baschet</span>
+        <span class="tag">Ping pong</span>
+        <span class="tag">Vestiare</span>
+        <span class="tag">Dusuri</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div>
+    <div class="footer-logo">Campus <span>Info Hub</span></div>
+    <div class="footer-copy">2025 — Universitatea Noastra</div>
+  </div>
+  <nav class="footer-links">
+    <a href="../index.html">Acasa</a>
+    <a href="library.html">Biblioteca</a>
+    <a href="cafeteria.html">Cantina</a>
+    <a href="https://www.edu.ro" target="_blank" rel="noopener">edu.ro</a>
+  </nav>
+</footer>
+
+</body>
+</html>
