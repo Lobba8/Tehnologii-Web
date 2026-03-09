@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cantina — Campus Info Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Campus <span>Info Hub</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Acasa</a></li>
+    <li><a href="library.html">Biblioteca</a></li>
+    <li><a href="cafeteria.html" class="active">Cantina</a></li>
+    <li><a href="events.html">Evenimente</a></li>
+    <li><a href="https://www.google.com/maps" target="_blank" rel="noopener">Harta</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <!-- Relative URL -->
+      <a href="../index.html">Acasa</a>
+      <span>/</span>
+      Cantina
+    </div>
+    <h1>Cantina si Cafenea</h1>
+    <p>Mancare variata, preturi accesibile pentru studenti. Meniu zilnic cu optiuni vegetariene si vegane.</p>
+  </div>
+</div>
+
+<!-- Fragment navigation -->
+<div class="sub-nav">
+  <div class="sub-nav-inner">
+    <a href="#meniu">Meniu</a>
+    <a href="#schedule">Program</a>
+    <a href="#cafe">Cafenea</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- Menu -->
+  <section class="section" id="meniu">
+    <h2 class="section-title">Meniu zilnic — Luni</h2>
+    <div class="grid-auto">
+
+      <div class="card">
+        <div class="card-label">Mic dejun</div>
+        <table class="info-table">
+          <tr><td>Omleta cu legume <small style="color:var(--muted)">(V)</small></td><td style="text-align:right; font-weight:500;">8 lei</td></tr>
+          <tr><td>Iaurt cu granola <small style="color:var(--muted)">(VG)</small></td><td style="text-align:right; font-weight:500;">6 lei</td></tr>
+          <tr><td>Toast cu avocado <small style="color:var(--muted)">(VG)</small></td><td style="text-align:right; font-weight:500;">10 lei</td></tr>
+          <tr><td>Sandvis cu sunca</td><td style="text-align:right; font-weight:500;">7 lei</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Pranz — Supe</div>
+        <table class="info-table">
+          <tr><td>Ciorba de burta</td><td style="text-align:right; font-weight:500;">10 lei</td></tr>
+          <tr><td>Supa crema de legume <small style="color:var(--muted)">(VG)</small></td><td style="text-align:right; font-weight:500;">8 lei</td></tr>
+          <tr><td>Ciorba de pui</td><td style="text-align:right; font-weight:500;">9 lei</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Pranz — Fel principal</div>
+        <table class="info-table">
+          <tr><td>Pulpa de pui la cuptor</td><td style="text-align:right; font-weight:500;">18 lei</td></tr>
+          <tr><td>Tofu teriyaki <small style="color:var(--muted)">(VG)</small></td><td style="text-align:right; font-weight:500;">15 lei</td></tr>
+          <tr><td>Muschiulet de porc</td><td style="text-align:right; font-weight:500;">20 lei</td></tr>
+          <tr><td>Paste primavara <small style="color:var(--muted)">(V)</small></td><td style="text-align:right; font-weight:500;">14 lei</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Deserturi</div>
+        <table class="info-table">
+          <tr><td>Papanasi cu smantana</td><td style="text-align:right; font-weight:500;">12 lei</td></tr>
+          <tr><td>Budinca de orez <small style="color:var(--muted)">(V)</small></td><td style="text-align:right; font-weight:500;">8 lei</td></tr>
+          <tr><td>Fruct de sezon <small style="color:var(--muted)">(VG)</small></td><td style="text-align:right; font-weight:500;">4 lei</td></tr>
+        </table>
+      </div>
+
+    </div>
+    <p style="margin-top:1.25rem; font-size:0.78rem; color:var(--muted);">
+      V = Vegetarian &nbsp;&middot;&nbsp; VG = Vegan &nbsp;&middot;&nbsp; Meniul se actualizeaza zilnic.
+      <!-- Fragment link -->
+      <a href="cafeteria.html#schedule" style="color:var(--accent); text-decoration:none; font-weight:500; margin-left:0.5rem;">Program &rarr;</a>
+    </p>
+  </section>
+
+  <hr class="divider" style="margin:0 0 3.5rem;" />
+
+  <!-- Schedule -->
+  <section class="section" id="schedule">
+    <h2 class="section-title">Program si informatii</h2>
+    <div class="grid-2">
+
+      <div class="card">
+        <div class="card-label">Program cantina principala</div>
+        <table class="info-table">
+          <tr><td>Luni – Vineri</td><td class="open">07:00 – 20:00</td></tr>
+          <tr><td>Sambata</td><td class="open">08:00 – 16:00</td></tr>
+          <tr><td>Duminica</td><td class="closed">Inchis</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Contact si locatie</div>
+        <table class="info-table">
+          <tr><td>Adresa</td><td>Cladirea C, Parter</td></tr>
+          <tr><td>Capacitate</td><td>500 locuri</td></tr>
+          <tr><td>Telefon</td><td>+40 21 000 0002</td></tr>
+          <tr><td>Email</td><td><a href="mailto:cantina@campus.ro" style="color:var(--accent)">cantina@campus.ro</a></td></tr>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" style="margin:0 0 3.5rem;" />
+
+  <!-- Cafe — fragment target -->
+  <section class="section" id="cafe">
+    <h2 class="section-title">Cafeneaua Student</h2>
+    <p style="font-size:0.875rem; color:var(--muted); margin-bottom:1.75rem; font-weight:300;">
+      Cafea specialty, snacks artizanale si zone de lucru confortabile. Cladirea A, Parter &mdash; 07:30 – 21:00 (L–V).
+    </p>
+    <div class="grid-2">
+
+      <div class="card">
+        <div class="card-label">Bauturi calde</div>
+        <table class="info-table">
+          <tr><td>Espresso</td><td style="text-align:right; font-weight:500;">6 lei</td></tr>
+          <tr><td>Cappuccino</td><td style="text-align:right; font-weight:500;">10 lei</td></tr>
+          <tr><td>Flat White</td><td style="text-align:right; font-weight:500;">12 lei</td></tr>
+          <tr><td>Ceai premium</td><td style="text-align:right; font-weight:500;">7 lei</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Snacks</div>
+        <table class="info-table">
+          <tr><td>Croissant cu unt</td><td style="text-align:right; font-weight:500;">8 lei</td></tr>
+          <tr><td>Muffin ciocolata</td><td style="text-align:right; font-weight:500;">9 lei</td></tr>
+          <tr><td>Wrap vegan</td><td style="text-align:right; font-weight:500;">14 lei</td></tr>
+          <tr><td>Granola bar</td><td style="text-align:right; font-weight:500;">6 lei</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div>
+    <div class="footer-logo">Campus <span>Info Hub</span></div>
+    <div class="footer-copy">2025 — Universitatea Noastra</div>
+  </div>
+  <nav class="footer-links">
+    <a href="../index.html">Acasa</a>
+    <a href="library.html">Biblioteca</a>
+    <a href="events.html">Evenimente</a>
+    <a href="https://www.edu.ro" target="_blank" rel="noopener">edu.ro</a>
+  </nav>
+</footer>
+
+</body>
+</html>

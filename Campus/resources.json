@@ -1,0 +1,122 @@
+{
+  "resources": [
+    {
+      "id": 1,
+      "name": "Biblioteca Centrala",
+      "type": "study",
+      "location": "Cladirea A, Etaj 2",
+      "program": {
+        "luni_vineri": "08:00 - 22:00",
+        "sambata": "09:00 - 18:00",
+        "duminica": "Inchis"
+      },
+      "description": "Biblioteca principala a campusului cu peste 50.000 de volume si sali de lectura.",
+      "capacity": 300,
+      "tags": ["study", "books", "quiet", "wifi", "printing"],
+      "contact": "biblioteca@campus.ro",
+      "url": "/pages/library.html"
+    },
+    {
+      "id": 2,
+      "name": "Sala de Lectura 24/7",
+      "type": "study",
+      "location": "Cladirea B, Parter",
+      "program": {
+        "luni_vineri": "Non-stop",
+        "sambata": "Non-stop",
+        "duminica": "Non-stop"
+      },
+      "description": "Sala de studiu deschisa non-stop, accesibila cu cardul de student.",
+      "capacity": 80,
+      "tags": ["study", "24/7", "quiet", "wifi"],
+      "contact": "studiu@campus.ro",
+      "url": "/pages/library.html#reading-room"
+    },
+    {
+      "id": 3,
+      "name": "Cantina Principala",
+      "type": "food",
+      "location": "Cladirea C, Parter",
+      "program": {
+        "luni_vineri": "07:00 - 20:00",
+        "sambata": "08:00 - 16:00",
+        "duminica": "Inchis"
+      },
+      "description": "Cantina principala cu meniu zilnic variat, optiuni vegetariene si vegane.",
+      "capacity": 500,
+      "tags": ["food", "lunch", "vegetarian", "vegan", "affordable"],
+      "contact": "cantina@campus.ro",
+      "url": "/pages/cafeteria.html"
+    },
+    {
+      "id": 4,
+      "name": "Cafeneaua Student",
+      "type": "food",
+      "location": "Cladirea A, Parter",
+      "program": {
+        "luni_vineri": "07:30 - 21:00",
+        "sambata": "09:00 - 19:00",
+        "duminica": "10:00 - 17:00"
+      },
+      "description": "Cafenea moderna cu cafea specialty, snacks si zone de lucru confortabile.",
+      "capacity": 60,
+      "tags": ["coffee", "food", "wifi", "cozy", "study"],
+      "contact": "cafenea@campus.ro",
+      "url": "/pages/cafeteria.html#cafe"
+    },
+    {
+      "id": 5,
+      "name": "Aula Magna",
+      "type": "events",
+      "location": "Cladirea D, Etaj 1",
+      "program": {
+        "luni_vineri": "Conform program evenimente",
+        "sambata": "Conform program evenimente",
+        "duminica": "Inchis"
+      },
+      "description": "Sala principala de conferinte si evenimente, capacitate mare, echipament AV modern.",
+      "capacity": 800,
+      "tags": ["events", "conferences", "lectures", "large-capacity"],
+      "contact": "events@campus.ro",
+      "url": "/pages/events.html"
+    },
+    {
+      "id": 6,
+      "name": "Centrul de Cariera",
+      "type": "events",
+      "location": "Cladirea E, Etaj 3",
+      "program": {
+        "luni_vineri": "09:00 - 17:00",
+        "sambata": "Inchis",
+        "duminica": "Inchis"
+      },
+      "description": "Resurse pentru dezvoltare profesionala, CV, internship-uri si job-uri.",
+      "capacity": 40,
+      "tags": ["career", "study", "internship", "workshops"],
+      "contact": "cariera@campus.ro",
+      "url": "/pages/events.html#career"
+    },
+    {
+      "id": 7,
+      "name": "Sala de Sport",
+      "type": "sport",
+      "location": "Cladirea F, Subsol",
+      "program": {
+        "luni_vineri": "06:00 - 22:00",
+        "sambata": "08:00 - 20:00",
+        "duminica": "09:00 - 18:00"
+      },
+      "description": "Sala de fitness complet echipata, accesibila studentilor cu abonament semestrial.",
+      "capacity": 120,
+      "tags": ["sport", "fitness", "gym", "health"],
+      "contact": "sport@campus.ro",
+      "url": "/pages/events.html#sport"
+    }
+  ],
+  "categories": [
+    { "id": "study",  "label": "Studiu",       "color": "#1a4a8a" },
+    { "id": "food",   "label": "Alimentatie",  "color": "#7a3520" },
+    { "id": "events", "label": "Evenimente",   "color": "#2a5c40" },
+    { "id": "sport",  "label": "Sport",        "color": "#5c4a10" }
+  ]
+}
