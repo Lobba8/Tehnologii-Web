@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookies Info – Laborator 3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+
+<nav>
+  <span class="logo">Lab3 &lt;HTTP/&gt;</span>
+  <ul>
+    <li><a href="index.html">Acasă</a></li>
+    <li><a href="preferences.html">Preferințe</a></li>
+    <li><a href="cookies-info.html" class="active">Cookies Info</a></li>
+    <li><a href="login.html">Autentificare</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>🍪 Informații Stocare</h1>
+    <p>Vizualizare detaliată a cookies, localStorage și sessionStorage</p>
+  </div>
+
+  <!-- COOKIES -->
+  <div class="card">
+    <h2>Cookie-uri</h2>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">Valoare brută <code>document.cookie</code>:</p>
+    <pre id="rawCookie">—</pre>
+    <br>
+    <table>
+      <thead><tr><th>Nume</th><th>Valoare</th><th>Lungime</th><th>Acțiune</th></tr></thead>
+      <tbody id="cookiesTbody"></tbody>
+    </table>
+  </div>
+
+  <!-- LOCALSTORAGE -->
+  <div class="card">
+    <h2>localStorage</h2>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">JSON complet:</p>
+    <pre id="rawLocal">—</pre>
+    <br>
+    <table>
+      <thead><tr><th>Cheie</th><th>Valoare</th><th>Dimensiune</th><th>Acțiune</th></tr></thead>
+      <tbody id="localTbody"></tbody>
+    </table>
+  </div>
+
+  <!-- SESSIONSTORAGE -->
+  <div class="card">
+    <h2>sessionStorage</h2>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">JSON complet:</p>
+    <pre id="rawSession">—</pre>
+    <br>
+    <table>
+      <thead><tr><th>Cheie</th><th>Valoare</th><th>Dimensiune</th><th>Acțiune</th></tr></thead>
+      <tbody id="sessionTbody"></tbody>
+    </table>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="card">
+    <h2>Tabel Comparativ</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Proprietate</th>
+          <th>🍪 Cookies</th>
+          <th>📦 localStorage</th>
+          <th>🗂️ sessionStorage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Capacitate</td>
+          <td>~4 KB</td>
+          <td>~5-10 MB</td>
+          <td>~5-10 MB</td>
+        </tr>
+        <tr>
+          <td>Expirare</td>
+          <td>Setabilă manual</td>
+          <td>Niciodată (manual)</td>
+          <td>La închiderea tab-ului</td>
+        </tr>
+        <tr>
+          <td>Trimis la server?</td>
+          <td>✅ Da (automat)</td>
+          <td>❌ Nu</td>
+          <td>❌ Nu</td>
+        </tr>
+        <tr>
+          <td>Accesibil din JavaScript?</td>
+          <td>✅ Da</td>
+          <td>✅ Da</td>
+          <td>✅ Da</td>
+        </tr>
+        <tr>
+          <td>Disponibil între tab-uri?</td>
+          <td>✅ Da</td>
+          <td>✅ Da</td>
+          <td>❌ Nu (per tab)</td>
+        </tr>
+        <tr>
+          <td>Stocare server-side?</td>
+          <td>✅ Da</td>
+          <td>❌ Doar client</td>
+          <td>❌ Doar client</td>
+        </tr>
+        <tr>
+          <td>Utilizare tipică</td>
+          <td>Sesiuni, tracking</td>
+          <td>Preferințe, date app</td>
+          <td>Date temporare, coș</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="actions-row">
+    <button class="btn btn-outline" onclick="renderAll()">🔄 Reîncarcă</button>
+  </div>
+</div>
+
+<script src="js/cookies.js"></script>
+<script src="js/storage.js"></script>
+<script>
+  function applyTheme() {
+    const theme = CookieManager.get('theme') || 'light';
+    document.body.className = theme;
+    document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+
+  function renderTbody(tbodyId, rows) {
+    const el = document.getElementById(tbodyId);
+    el.innerHTML = rows.length
+      ? rows.join('')
+      : '<tr class="empty-row"><td colspan="4">— gol —</td></tr>';
+  }
+
+  function renderAll() {
+    // Cookies
+    const rawC = document.cookie || '—';
+    document.getElementById('rawCookie').textContent = rawC;
+    const allC = CookieManager.getAll();
+    renderTbody('cookiesTbody', Object.keys(allC).map(k => `
+      <tr>
+        <td><strong>${k}</strong></td>
+        <td>${allC[k]}</td>
+        <td>${(k + allC[k]).length} chars</td>
+        <td><button class="btn btn-danger btn-sm" onclick="delCookie('${k}')">Șterge</button></td>
+      </tr>`));
+
+    // localStorage
+    const allL = StorageManager.getAllLocal();
+    const rawL = JSON.stringify(allL, null, 2);
+    document.getElementById('rawLocal').textContent = rawL || '{}';
+    renderTbody('localTbody', Object.keys(allL).map(k => {
+      const v = JSON.stringify(allL[k]);
+      return `<tr>
+        <td><strong>${k}</strong></td>
+        <td>${v.length > 70 ? v.substring(0,70)+'…' : v}</td>
+        <td>${v.length} chars</td>
+        <td><button class="btn btn-danger btn-sm" onclick="delLocal('${k}')">Șterge</button></td>
+      </tr>`;
+    }));
+
+    // sessionStorage
+    const allS = StorageManager.getAllSession();
+    const rawS = JSON.stringify(allS, null, 2);
+    document.getElementById('rawSession').textContent = rawS || '{}';
+    renderTbody('sessionTbody', Object.keys(allS).map(k => {
+      const v = JSON.stringify(allS[k]);
+      return `<tr>
+        <td><strong>${k}</strong></td>
+        <td>${v.length > 70 ? v.substring(0,70)+'…' : v}</td>
+        <td>${v.length} chars</td>
+        <td><button class="btn btn-danger btn-sm" onclick="delSession('${k}')">Șterge</button></td>
+      </tr>`;
+    }));
+  }
+
+  function delCookie(name) { CookieManager.delete(name); renderAll(); }
+  function delLocal(key) { StorageManager.removeLocal(key); renderAll(); }
+  function delSession(key) { StorageManager.removeSession(key); renderAll(); }
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = document.body.className === 'light' ? 'dark' : 'light';
+    CookieManager.set('theme', next);
+    document.body.className = next;
+    document.getElementById('themeToggle').textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
+  applyTheme();
+  renderAll();
+</script>
+</body>
+</html>

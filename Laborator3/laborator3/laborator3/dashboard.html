@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – Laborator 3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+
+<nav>
+  <span class="logo">Lab3 &lt;HTTP/&gt;</span>
+  <ul>
+    <li><a href="index.html">Acasă</a></li>
+    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+    <li><a href="cart.html">🛒 Coș</a></li>
+    <li><a href="preferences.html">Preferințe</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Dashboard 🖥️</h1>
+    <p>Bine ai venit, <strong id="dashUsername">—</strong>!</p>
+  </div>
+
+  <div id="alertArea"></div>
+
+  <!-- SESSION INFO -->
+  <div class="card">
+    <h2>Informații Sesiune</h2>
+    <div class="session-grid">
+      <div class="session-item">
+        <div class="si-label">ID Sesiune</div>
+        <div class="si-value" id="siSessionId">—</div>
+      </div>
+      <div class="session-item">
+        <div class="si-label">Username</div>
+        <div class="si-value" id="siUsername">—</div>
+      </div>
+      <div class="session-item">
+        <div class="si-label">Email</div>
+        <div class="si-value" id="siEmail">—</div>
+      </div>
+      <div class="session-item">
+        <div class="si-label">Ora autentificării</div>
+        <div class="si-value" id="siLoginTime">—</div>
+      </div>
+      <div class="session-item" style="grid-column:span 2;text-align:center;">
+        <div class="si-label">Durată sesiune</div>
+        <div class="timer" id="timerDisplay">00:00:00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="card">
+    <h2>Acțiuni</h2>
+    <div class="actions-row">
+      <a href="cart.html" class="btn btn-primary">🛒 Coș de Cumpărături</a>
+      <button class="btn btn-outline" id="newTabBtn">↗️ Deschide în Tab Nou</button>
+      <button class="btn btn-danger" id="logoutBtn">🚪 Deconectare</button>
+    </div>
+    <div style="margin-top:14px;padding:12px;background:var(--table-head);border-radius:8px;font-size:0.85rem;color:var(--muted);">
+      💡 <strong>Experiment:</strong> Deschide pagina într-un tab nou și observă că <code>sessionStorage</code> este <strong>diferit</strong> pentru fiecare tab — noul tab va cere autentificarea din nou!
+    </div>
+  </div>
+
+  <!-- RAW SESSION DATA -->
+  <div class="card">
+    <h2>Date Brute sessionStorage (debug)</h2>
+    <pre id="rawSession">—</pre>
+  </div>
+</div>
+
+<script src="js/cookies.js"></script>
+<script src="js/storage.js"></script>
+<script>
+  document.body.className = CookieManager.get('theme') || 'light';
+  document.getElementById('themeToggle').textContent = document.body.className === 'dark' ? '☀️' : '🌙';
+
+  // Check auth
+  const session = StorageManager.getSession('userSession');
+  if (!session) {
+    window.location.href = 'login.html';
+  }
+
+  // Populate
+  document.getElementById('dashUsername').textContent = session.username;
+  document.getElementById('siSessionId').textContent = session.sessionId;
+  document.getElementById('siUsername').textContent = session.username;
+  document.getElementById('siEmail').textContent = session.email;
+
+  const loginDate = new Date(session.loginTime);
+  document.getElementById('siLoginTime').textContent = loginDate.toLocaleString('ro-RO');
+
+  document.getElementById('rawSession').textContent = JSON.stringify(StorageManager.getAllSession(), null, 2);
+
+  // Timer
+  function updateTimer() {
+    const diff = Math.floor((Date.now() - loginDate.getTime()) / 1000);
+    const h = String(Math.floor(diff / 3600)).padStart(2, '0');
+    const m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
+    const s = String(diff % 60).padStart(2, '0');
+    document.getElementById('timerDisplay').textContent = `${h}:${m}:${s}`;
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    StorageManager.clearSession();
+    window.location.href = 'login.html';
+  });
+
+  // New tab
+  document.getElementById('newTabBtn').addEventListener('click', () => {
+    window.open('dashboard.html', '_blank');
+  });
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = document.body.className === 'light' ? 'dark' : 'light';
+    CookieManager.set('theme', next);
+    document.body.className = next;
+    document.getElementById('themeToggle').textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+</script>
+</body>
+</html>

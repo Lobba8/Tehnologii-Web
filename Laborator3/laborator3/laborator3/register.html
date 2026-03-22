@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Înregistrare – Laborator 3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h1>📝 Înregistrare</h1>
+    <p class="subtitle">Creează un cont nou</p>
+
+    <div id="alertArea"></div>
+
+    <div class="form-group">
+      <label for="username">Username <small style="color:var(--muted)">(minim 3 caractere)</small></label>
+      <input type="text" id="username" placeholder="username_tau" autocomplete="username">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="email@exemplu.com" autocomplete="email">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Parolă <small style="color:var(--muted)">(minim 6 caractere)</small></label>
+      <input type="password" id="password" placeholder="••••••••" autocomplete="new-password">
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirmare parolă</label>
+      <input type="password" id="confirmPassword" placeholder="••••••••" autocomplete="new-password">
+    </div>
+
+    <button class="btn btn-primary" style="width:100%" id="registerBtn">✅ Creează contul</button>
+
+    <div class="auth-link">
+      Ai deja cont? <a href="login.html">Autentifică-te</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/cookies.js"></script>
+<script src="js/storage.js"></script>
+<script>
+  document.body.className = CookieManager.get('theme') || 'light';
+
+  // Init default users
+  if (!StorageManager.getLocal('users')) {
+    StorageManager.setLocal('users', [
+      { id: 1, username: 'admin', password: 'password', email: 'admin@example.com' },
+      { id: 2, username: 'student', password: 'student123', email: 'student@example.com' }
+    ]);
+  }
+
+  function showAlert(msg, type) {
+    document.getElementById('alertArea').innerHTML =
+      `<div class="alert alert-${type}">${msg}</div>`;
+  }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  document.getElementById('registerBtn').addEventListener('click', () => {
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Validations
+    if (!username || !email || !password || !confirmPassword) {
+      showAlert('⚠️ Toate câmpurile sunt obligatorii.', 'error'); return;
+    }
+    if (username.length < 3) {
+      showAlert('⚠️ Username-ul trebuie să aibă minim 3 caractere.', 'error'); return;
+    }
+    if (!validateEmail(email)) {
+      showAlert('⚠️ Adresa de email nu este validă.', 'error'); return;
+    }
+    if (password.length < 6) {
+      showAlert('⚠️ Parola trebuie să aibă minim 6 caractere.', 'error'); return;
+    }
+    if (password !== confirmPassword) {
+      showAlert('⚠️ Parolele nu coincid.', 'error'); return;
+    }
+
+    const users = StorageManager.getLocal('users') || [];
+
+    if (users.find(u => u.username === username)) {
+      showAlert('❌ Username-ul este deja folosit.', 'error'); return;
+    }
+    if (users.find(u => u.email === email)) {
+      showAlert('❌ Adresa de email este deja înregistrată.', 'error'); return;
+    }
+
+    const newUser = {
+      id: Date.now(),
+      username,
+      password,
+      email
+    };
+    users.push(newUser);
+    StorageManager.setLocal('users', users);
+
+    showAlert('✅ Cont creat cu succes! Redirecționare spre login…', 'success');
+    setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('registerBtn').click();
+  });
+</script>
+</body>
+</html>
