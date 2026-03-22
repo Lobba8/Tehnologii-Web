@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preferințe – Laborator 3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+
+<nav>
+  <span class="logo">Lab3 &lt;HTTP/&gt;</span>
+  <ul>
+    <li><a href="index.html">Acasă</a></li>
+    <li><a href="preferences.html" class="active">Preferințe</a></li>
+    <li><a href="cookies-info.html">Cookies Info</a></li>
+    <li><a href="login.html">Autentificare</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle" title="Schimbă tema">🌙</button>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>⚙️ Preferințe Utilizator</h1>
+    <p>Setările sunt salvate în cookies și localStorage</p>
+  </div>
+
+  <div id="alertArea"></div>
+
+  <div class="card">
+    <h2>Personalizare</h2>
+
+    <div class="form-group">
+      <label for="username">Nume utilizator</label>
+      <input type="text" id="username" placeholder="Ex: Ion Popescu">
+    </div>
+
+    <div class="form-group">
+      <label for="theme">Temă</label>
+      <select id="theme">
+        <option value="light">☀️ Luminos</option>
+        <option value="dark">🌙 Întunecat</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="language">Limbă</label>
+      <select id="language">
+        <option value="ro">🇷🇴 Română</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="fontSize">Dimensiune font</label>
+      <select id="fontSize">
+        <option value="14">14px – Mic</option>
+        <option value="16" selected>16px – Normal</option>
+        <option value="18">18px – Mare</option>
+        <option value="20">20px – Foarte mare</option>
+      </select>
+    </div>
+
+    <div class="actions-row">
+      <button class="btn btn-primary" id="saveBtn">💾 Salvează preferințele</button>
+      <button class="btn btn-outline" id="resetBtn">↩️ Resetează</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Unde se salvează?</h2>
+    <table>
+      <thead>
+        <tr><th>Preferință</th><th>Tip stocare</th><th>Durata</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Nume utilizator</td><td><span class="badge">Cookie</span></td><td>365 zile</td></tr>
+        <tr><td>Temă</td><td><span class="badge">Cookie</span></td><td>365 zile</td></tr>
+        <tr><td>Limbă</td><td><span class="badge" style="background:rgba(39,174,96,0.15);color:#27ae60">localStorage</span></td><td>Permanent</td></tr>
+        <tr><td>Dimensiune font</td><td><span class="badge" style="background:rgba(39,174,96,0.15);color:#27ae60">localStorage</span></td><td>Permanent</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="js/cookies.js"></script>
+<script src="js/storage.js"></script>
+<script>
+  function applyTheme(theme) {
+    document.body.className = theme;
+    document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+
+  function loadPreferences() {
+    const username = CookieManager.get('username') || '';
+    const theme = CookieManager.get('theme') || 'light';
+    const language = StorageManager.getLocal('language') || 'ro';
+    const fontSize = StorageManager.getLocal('fontSize') || '16';
+
+    document.getElementById('username').value = username;
+    document.getElementById('theme').value = theme;
+    document.getElementById('language').value = language;
+    document.getElementById('fontSize').value = fontSize;
+
+    applyTheme(theme);
+    document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+  }
+
+  function showAlert(msg, type) {
+    const a = document.getElementById('alertArea');
+    a.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+    setTimeout(() => a.innerHTML = '', 3000);
+  }
+
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    const username = document.getElementById('username').value.trim();
+    const theme = document.getElementById('theme').value;
+    const language = document.getElementById('language').value;
+    const fontSize = document.getElementById('fontSize').value;
+
+    CookieManager.set('username', username || 'Vizitator', 365);
+    CookieManager.set('theme', theme, 365);
+    StorageManager.setLocal('language', language);
+    StorageManager.setLocal('fontSize', parseInt(fontSize));
+
+    applyTheme(theme);
+    document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+
+    showAlert('✅ Preferințele au fost salvate cu succes!', 'success');
+    setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    CookieManager.delete('username');
+    CookieManager.delete('theme');
+    StorageManager.removeLocal('language');
+    StorageManager.removeLocal('fontSize');
+    loadPreferences();
+    showAlert('Preferințele au fost resetate.', 'success');
+  });
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const current = document.getElementById('theme').value;
+    const next = current === 'light' ? 'dark' : 'light';
+    document.getElementById('theme').value = next;
+    applyTheme(next);
+  });
+
+  // Preview live
+  document.getElementById('theme').addEventListener('change', e => applyTheme(e.target.value));
+  document.getElementById('fontSize').addEventListener('change', e => {
+    document.documentElement.style.setProperty('--font-size', e.target.value + 'px');
+  });
+
+  loadPreferences();
+</script>
+</body>
+</html>
