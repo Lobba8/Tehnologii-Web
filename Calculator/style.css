@@ -1,0 +1,234 @@
+/* ===========================
+   RESET & VARIABILE GLOBALE
+   =========================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-page:      #0f0f0f;
+    --bg-calc:      #1a1a1a;
+    --bg-display:   #111111;
+    --bg-btn:       #2a2a2a;
+    --bg-btn-op:    #ff6b00;
+    --bg-btn-clear: #3a3a3a;
+    --bg-btn-eq:    #ff6b00;
+
+    --text-display: #ffffff;
+    --text-expr:    #888888;
+    --text-btn:     #ffffff;
+    --text-btn-op:  #ffffff;
+    --text-error:   #ff4444;
+
+    --shadow-calc:  0 30px 80px rgba(0,0,0,0.7);
+    --shadow-btn:   0 4px 10px rgba(0,0,0,0.4);
+    --radius-calc:  28px;
+    --radius-btn:   16px;
+
+    --font-display: 'JetBrains Mono', 'Courier New', monospace;
+    --font-btn:     'Inter', 'Segoe UI', sans-serif;
+
+    --transition:   0.12s ease;
+}
+
+/* ===========================
+   PAGINA
+   =========================== */
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-page);
+    background-image:
+        radial-gradient(ellipse at 20% 30%, rgba(255,107,0,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,107,0,0.05) 0%, transparent 50%);
+    font-family: var(--font-btn);
+}
+
+/* ===========================
+   CONTAINERUL CALCULATORULUI
+   =========================== */
+.calculator {
+    width: 340px;
+    background: var(--bg-calc);
+    border-radius: var(--radius-calc);
+    box-shadow: var(--shadow-calc);
+    padding: 24px 20px 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    user-select: none;
+}
+
+/* ===========================
+   ECRAN (DISPLAY)
+   =========================== */
+.display-area {
+    background: var(--bg-display);
+    border-radius: 18px;
+    padding: 18px 20px 14px;
+    margin-bottom: 20px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+#expression {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--text-expr);
+    min-height: 1.2em;
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+    word-break: break-all;
+    text-align: right;
+    transition: color var(--transition);
+}
+
+#display {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--text-display);
+    letter-spacing: -0.02em;
+    word-break: break-all;
+    text-align: right;
+    line-height: 1.1;
+    transition: font-size 0.15s ease, color 0.15s ease;
+}
+
+#display.error {
+    color: var(--text-error);
+    font-size: 1.2rem !important;
+}
+
+/* Animatie pop la update display */
+@keyframes pop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.015); }
+    100% { transform: scale(1); }
+}
+
+#display.pop {
+    animation: pop 0.18s ease-out;
+}
+
+/* ===========================
+   GRILA DE BUTOANE
+   =========================== */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+/* ===========================
+   BUTON GENERIC
+   =========================== */
+.btn {
+    height: 72px;
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: var(--font-btn);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-btn);
+    background: var(--bg-btn);
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    position: relative;
+    overflow: hidden;
+    /* Ripple placeholder */
+    isolation: isolate;
+}
+
+.btn:hover {
+    background: #363636;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+}
+
+.btn:active,
+.btn.pressed {
+    transform: scale(0.93) translateY(1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    background: #222;
+}
+
+/* ===========================
+   VARIANTE DE BUTOANE
+   =========================== */
+
+/* Buton AC / C */
+.btn-clear {
+    background: var(--bg-btn-clear);
+    color: #ffcc88;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.btn-clear:hover { background: #484848; }
+.btn-clear:active, .btn-clear.pressed { background: #2e2e2e; }
+
+/* Butoane operator */
+.btn-operator {
+    background: rgba(255,107,0,0.15);
+    color: var(--bg-btn-op);
+    font-size: 1.4rem;
+    border: 1px solid rgba(255,107,0,0.25);
+}
+
+.btn-operator:hover {
+    background: rgba(255,107,0,0.25);
+    border-color: rgba(255,107,0,0.4);
+}
+
+.btn-operator:active,
+.btn-operator.pressed {
+    background: rgba(255,107,0,0.1);
+}
+
+/* Buton = */
+.btn-equals {
+    background: var(--bg-btn-eq);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 400;
+    box-shadow: 0 4px 20px rgba(255,107,0,0.35);
+}
+
+.btn-equals:hover {
+    background: #ff7f1a;
+    box-shadow: 0 6px 24px rgba(255,107,0,0.5);
+}
+
+.btn-equals:active,
+.btn-equals.pressed {
+    background: #e05500;
+    box-shadow: 0 2px 10px rgba(255,107,0,0.3);
+}
+
+/* Butonul 0 — ocupa 2 coloane */
+.btn-zero {
+    grid-column: span 2;
+    text-align: left;
+    padding-left: 26px;
+}
+
+/* ===========================
+   HINT TASTATURA
+   =========================== */
+.keyboard-hint {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.7rem;
+    color: #444;
+    letter-spacing: 0.04em;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator MVC</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- VIEW: stilul calculatorului -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!--
+        VIEW — Structura HTML a calculatorului
+        Fiecare buton are:
+            data-value  = valoarea transmisa Controller-ului
+            data-type   = tipul actiunii: digit | operator | equals | clear
+    -->
+    <div class="calculator" role="application" aria-label="Calculator">
+
+        <!-- Ecran: afiseaza expresia curenta si rezultatul -->
+        <div class="display-area" aria-live="polite">
+            <div id="expression" aria-label="Expresie curenta"></div>
+            <div id="display"    aria-label="Valoare afisata">0</div>
+        </div>
+
+        <!-- Grila de butoane -->
+        <div class="buttons">
+
+            <!-- Randul 1 -->
+            <button id="btn-clear" class="btn btn-clear"    data-value="clear" data-type="clear">AC</button>
+            <button class="btn btn-operator"                data-value="/"     data-type="operator">÷</button>
+            <button class="btn btn-operator"                data-value="*"     data-type="operator">×</button>
+            <button class="btn btn-operator"                data-value="-"     data-type="operator">−</button>
+
+            <!-- Randul 2 -->
+            <button class="btn" data-value="7" data-type="digit">7</button>
+            <button class="btn" data-value="8" data-type="digit">8</button>
+            <button class="btn" data-value="9" data-type="digit">9</button>
+            <!-- Butonul + ocupa 2 randuri pe verticala -->
+            <button class="btn btn-operator" style="grid-row: span 2;" data-value="+" data-type="operator">+</button>
+
+            <!-- Randul 3 -->
+            <button class="btn" data-value="4" data-type="digit">4</button>
+            <button class="btn" data-value="5" data-type="digit">5</button>
+            <button class="btn" data-value="6" data-type="digit">6</button>
+
+            <!-- Randul 4 -->
+            <button class="btn" data-value="1" data-type="digit">1</button>
+            <button class="btn" data-value="2" data-type="digit">2</button>
+            <button class="btn" data-value="3" data-type="digit">3</button>
+            <!-- Butonul = ocupa 2 randuri pe verticala -->
+            <button class="btn btn-equals" style="grid-row: span 2;" data-value="=" data-type="equals">=</button>
+
+            <!-- Randul 5 -->
+            <button class="btn btn-zero" data-value="0" data-type="digit">0</button>
+            <button class="btn"          data-value="." data-type="digit">.</button>
+
+        </div>
+
+        <p class="keyboard-hint">Suporta si input de la tastatura</p>
+    </div>
+
+    <!--
+        Ordinea de incarcare a scripturilor este importanta:
+        1. Model   — logica si starea
+        2. View    — afisarea
+        3. Controller — face legatura si porneste aplicatia
+    -->
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="controller.js"></script>
+</body>
+</html>
